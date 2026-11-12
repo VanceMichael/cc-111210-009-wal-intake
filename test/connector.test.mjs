@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {inspect,sqliteHeader} from '../src/connector.mjs';import {startFixture} from '../fixtures/source.mjs';
+test('数据库头拒绝任意文件',()=>assert.throws(()=>sqliteHeader(Buffer.alloc(100)),/无效/));
+test('真实主库与未checkpoint的WAL由独立导出产生',async()=>{const source=await startFixture();try{assert.equal((await inspect(source.url)).rows.length,1);const manifest=await(await fetch(source.url+'/manifest')).json();assert.equal(manifest.files.length,2);const wal=Buffer.from(await(await fetch(source.url+'/main.sqlite-wal')).arrayBuffer());assert.ok([0x377f0682,0x377f0683].includes(wal.readUInt32BE(0)));assert.equal(wal.readUInt32BE(8),4096);assert.ok(wal.readUInt32BE(36)>0);}finally{await source.close();}});
