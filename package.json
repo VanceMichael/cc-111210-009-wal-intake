@@ -10,7 +10,8 @@
     "build": "node scripts/check.mjs",
     "test": "node --test test/*.test.mjs",
     "demo": "node src/demo.mjs",
-    "start": "node src/main.mjs"
+    "start": "node src/main.mjs",
+    "source": "node fixtures/main.mjs"
   },
   "dependencies": {}
 }
