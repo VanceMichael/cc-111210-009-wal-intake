@@ -10,8 +10,10 @@
     "build": "node scripts/check.mjs",
     "test": "node --test test/*.test.mjs",
     "demo": "node src/demo.mjs",
+    "demo:offline": "node src/demo-offline.mjs",
     "start": "node src/main.mjs",
-    "source": "node fixtures/main.mjs"
+    "source": "node fixtures/main.mjs",
+    "intake": "node src/intake-cli.mjs"
   },
   "dependencies": {}
 }
